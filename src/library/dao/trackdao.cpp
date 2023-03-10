@@ -630,7 +630,7 @@ TrackId TrackDAO::addTracksAddTrack(const TrackPointer& pTrack, bool unremove) {
         }
 
         // Time stamps are stored with timezone UTC in the database
-        const auto trackDateAdded = QDateTime::currentDateTimeUtc();
+        const auto trackDateAdded = pTrack->getFileInfo().fileLastModified();
         if (!insertTrackLibrary(m_pQueryLibraryInsert.get(), *pTrack, trackLocationId, trackDateAdded)) {
             return TrackId();
         }
